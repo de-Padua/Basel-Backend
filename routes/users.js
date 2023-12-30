@@ -13,7 +13,7 @@ const userController = require("../controllers/userControllers")
 
 //config
 route.use(cookieParser());
-route.use(cors({ origin: "https://basel-oziis1aw0-antonios-projects-92441c28.vercel.app", credentials: true }));
+route.use(cors({ origin: "*", credentials: true }));
 
 //routes
 route.post("/user/create/new", jsonParser,userController.createUser);
