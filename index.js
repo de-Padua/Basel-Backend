@@ -22,7 +22,12 @@ app.use(tasks_route);
 
 //set db connection
 
-
+const io = new Server(server, {
+  cors: {
+    origin: "https://basel-oziis1aw0-antonios-projects-92441c28.vercel.app",
+    methods: ["GET", "POST"],
+  },
+});
 
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
@@ -32,7 +37,15 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", () => {
   console.log("Connected to the database");
 
+  io.on("connection", (socket) => {
+    const changeStream = TASK_MODEL.watch();
 
+    changeStream.on("change",  (change) => {
+      
+        socket.emit("new-comment");
+     
+    });
+  });
 })
 
 
