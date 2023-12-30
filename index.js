@@ -34,7 +34,9 @@ db.once("open", () => {
 
   
 })
-const io = new Server(server,{ cors: { origin: "*" } });
+
+//FIX THE WEB SOCKET CONNECTION
+/*const io = new Server(server,{ cors: { origin: "*" } });
 
 
 io.on("connection", (socket) => {
@@ -45,4 +47,4 @@ io.on("connection", (socket) => {
       socket.emit("new-comment");
    
   });
-});
+}); */
