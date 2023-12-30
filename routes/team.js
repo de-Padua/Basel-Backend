@@ -11,7 +11,7 @@ const cookieParser = require("cookie-parser");
 //config
 const teamController = require("../controllers/teamControllers")
 const cors = require("cors");
-route.use(cors({ origin: "*"}));
+route.use(cors({ origin: "https://basel-oziis1aw0-antonios-projects-92441c28.vercel.app", credentials: true }));
 route.use(cookieParser());
 
 

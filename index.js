@@ -10,7 +10,11 @@ const port = 3030;
 const cors = require("cors");
 const TASK_MODEL = require("./models/task");
 
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "https://basel-1b2ea6jop-antonios-projects-92441c28.vercel.app", 
+credentials: true }));
+
+
+
 
 const server = app.listen(port);
 app.use(users_route);
@@ -37,8 +41,10 @@ db.once("open", () => {
   io.on("connection", (socket) => {
     const changeStream = TASK_MODEL.watch();
 
-    changeStream.on("change", (change) => {
-      socket.emit("new-comment");
+    changeStream.on("change",  (change) => {
+      
+        socket.emit("new-comment");
+     
     });
   });
-});
+})
