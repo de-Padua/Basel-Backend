@@ -22,6 +22,8 @@ route.post("/user/login", jsonParser,userController.loginUser);
 route.post("/user/logout", jsonParser,userController.logOut);
 route.patch("/user/profile/edit", jsonParser ,userController.manageProfile);
 route.get("/user/:userid", jsonParser ,userController.getUser);
-
+route.get("/",jsonParser,async (req,res)=>{
+    res.status(200).json({data:"ok"})
+})
 
 module.exports = route;
