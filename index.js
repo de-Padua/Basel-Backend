@@ -10,9 +10,6 @@ const port = 3030;
 const cors = require("cors");
 const TASK_MODEL = require("./models/task");
 
-app.use(cors({ origin: "https://basel-1b2ea6jop-antonios-projects-92441c28.vercel.app", 
-credentials: true }));
-
 
 
 
