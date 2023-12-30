@@ -22,12 +22,7 @@ app.use(tasks_route);
 
 //set db connection
 
-const io = new Server(server, {
-  cors: {
-    origin: ["https://basel-plum.vercel.app"],
-    methods: ["GET", "POST"], credentials: true 
-  },
-});
+
 
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
@@ -40,6 +35,12 @@ db.once("open", () => {
 
 })
 
+const io = new Server(server, {
+  cors: {
+    origin: ["https://basel-plum.vercel.app"],
+    methods: ["GET", "POST"], credentials: true 
+  },
+});
 io.on("connection", (socket) => {
   const changeStream = TASK_MODEL.watch();
 
