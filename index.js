@@ -25,7 +25,7 @@ app.use(tasks_route);
 const io = new Server(server, {
   cors: {
     origin: ["https://basel-plum.vercel.app"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST"], credentials: true 
   },
 });
 
