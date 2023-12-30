@@ -23,7 +23,6 @@ app.use(tasks_route);
 
 //set db connection
 
-const io = new Server(server);
 
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
@@ -35,6 +34,7 @@ db.once("open", () => {
 
   
 })
+const io = new Server(server,{ cors: { origin: "*" } });
 
 
 io.on("connection", (socket) => {
