@@ -31,22 +31,22 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 db.once("open", () => {
   console.log("Connected to the database");
-
+  const io = new Server(server, {
+    cors: {
+      origin: ["https://basel-plum.vercel.app"],
+      methods: ["GET", "POST"], credentials: true 
+    },
+  });
+  io.on("connection", (socket) => {
+    const changeStream = TASK_MODEL.watch();
+  
+    changeStream.on("change",  (change) => {
+      
+        socket.emit("new-comment");
+     
+    });
+  });
 
 })
 
-const io = new Server(server, {
-  cors: {
-    origin: ["https://basel-plum.vercel.app"],
-    methods: ["GET", "POST"], credentials: true 
-  },
-});
-io.on("connection", (socket) => {
-  const changeStream = TASK_MODEL.watch();
 
-  changeStream.on("change",  (change) => {
-    
-      socket.emit("new-comment");
-   
-  });
-});
