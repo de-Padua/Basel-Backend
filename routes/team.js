@@ -11,7 +11,7 @@ const cookieParser = require("cookie-parser");
 //config
 const teamController = require("../controllers/teamControllers")
 const cors = require("cors");
-route.use(cors({ origin: "*", credentials: true }));
+route.use(cors({ origin: "*"}));
 route.use(cookieParser());
 
 

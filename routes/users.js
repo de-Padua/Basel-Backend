@@ -13,7 +13,7 @@ const userController = require("../controllers/userControllers")
 
 //config
 route.use(cookieParser());
-route.use(cors({ origin: "*", credentials: true }));
+route.use(cors({ origin: "*"}));
 
 //routes
 route.post("/user/create/new", jsonParser,userController.createUser);

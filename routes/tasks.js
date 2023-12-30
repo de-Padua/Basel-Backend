@@ -11,7 +11,7 @@ const jsonParser = bodyParser.json();
 const cookieParser = require("cookie-parser");
 
 const cors = require("cors");
-route.use(cors({ origin: "*", credentials: true }));
+route.use(cors({ origin: "*"}));
 route.use(cookieParser());
 
 
