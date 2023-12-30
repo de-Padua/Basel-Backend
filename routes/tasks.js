@@ -19,6 +19,7 @@ route.use(cookieParser());
 route.get("/tasks/:id",jsonParser,taskControllers.getTaskById)
 route.patch("/tasks/addcomment/:taskid",jsonParser,taskControllers.addNewcomment)
 route.patch('/tasks/:x/comment',jsonParser,taskControllers.manageTask)
+route.patch('/tasks/edit/',jsonParser,taskControllers.editTask)
 
 
 const changeStream = TASK_MODEL.watch();

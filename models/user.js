@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  
   name: {
     type: String,
     require: true,
+  },
+  bio:{
+    type:String,
+    require: false,
+
   },
   password: {
     type: String,
@@ -16,6 +22,13 @@ const userSchema = new mongoose.Schema({
   teams: {
     type: Array,
   },
+  
 });
+
+
+
+
+
+
 
 module.exports = mongoose.model("users", userSchema);

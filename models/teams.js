@@ -2,40 +2,11 @@
 const mongoose = require('mongoose')
 
 
-const commentSchema = new mongoose.Schema({
-    owner: {
-      type:String,
-      require:true
-    },
-    id: {
-      type:String,
-      require:true
-    },
-    comment: {
-      type:String,
-      require:true
-    },
-    date: {
-      type: Date,
-      require:true
-    },
-  });
-  
-  const taskSchema = new mongoose.Schema({
-    title: {
-      type:String,
-      require:true
-    },
-    description: {
-      type:String,
-      require:true
-    },
-    comments: [commentSchema],
-  });
-  
+
   const teamSchema = new mongoose.Schema({
-    teamName:{
-      Type:String
+    teamName: {
+      type:String,
+      require:true
     },
     teamId: {
       type:String,
@@ -51,18 +22,17 @@ const commentSchema = new mongoose.Schema({
           type:String,
           require:true
         },
-        password: {
+       
+        _id:{
           type:String,
           require:true
-        },
-        email: {
-          type:String,
-          require:true
-        },
+
+        }
       },
     ],
     tasks: [],
     closed_tasks: [],
+    adm:[]
   });
 
 

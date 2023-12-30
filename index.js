@@ -1,18 +1,30 @@
-require('dotenv').config()
-const express = require('express')
-const users_route = require("./routes/users")
-const teams_route = require("./routes/team")
-const mongoose = require('mongoose')
-const app = express()
-const port = 3030
+require("dotenv").config();
+const express = require("express");
+const users_route = require("./routes/users");
+const teams_route = require("./routes/team");
+const tasks_route = require("./routes/tasks");
+const { Server } = require("socket.io");
+const mongoose = require("mongoose");
+const app = express();
+const port = 3030;
+const cors = require("cors");
+const TASK_MODEL = require("./models/task");
 
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
-app.listen(port)
-app.use(users_route)
-app.use(teams_route)
-
+const server = app.listen(port);
+app.use(users_route);
+app.use(teams_route);
+app.use(tasks_route);
 
 //set db connection
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 
 mongoose.connect(process.env.DB_URL);
 const db = mongoose.connection;
@@ -20,5 +32,15 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 db.once("open", () => {
-  console.log("Connect to database");
+  console.log("Connected to the database");
+
+  io.on("connection", (socket) => {
+    const changeStream = TASK_MODEL.watch();
+
+    changeStream.on("change",  (change) => {
+      
+        socket.emit("new-comment");
+     
+    });
+  });
 })
