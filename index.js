@@ -21,7 +21,7 @@ app.use(tasks_route);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://basel-oziis1aw0-antonios-projects-92441c28.vercel.app",
     methods: ["GET", "POST"],
   },
 });
